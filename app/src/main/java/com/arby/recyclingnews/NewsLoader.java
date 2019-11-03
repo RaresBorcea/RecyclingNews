@@ -1,9 +1,5 @@
 package com.arby.recyclingnews;
 
-/**
- * Created by rares on 23.08.2017.
- */
-
 import android.content.AsyncTaskLoader;
 import android.content.Context;
 

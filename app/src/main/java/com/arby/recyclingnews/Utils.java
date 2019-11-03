@@ -1,9 +1,5 @@
 package com.arby.recyclingnews;
 
-/**
- * Created by rares on 23.08.2017.
- */
-
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -28,7 +24,7 @@ import java.util.List;
 public final class Utils {
 
     /**
-     * Create a private constructor because no one should ever create a {@link Utils} object.
+     * Create a private constructor because no one should ever create a Utils object.
      * This class is only meant to hold static variables and methods, which can be accessed
      * directly from the class name Utils (and an object instance of Utils is not needed).
      */
@@ -41,7 +37,7 @@ public final class Utils {
     public static final String LOG_TAG = Utils.class.getSimpleName();
 
     /**
-     * Query the dataset and return an {@link News} object to represent a single news.
+     * Query the dataset and return an News object to represent a single news.
      */
     public static List<News> fetchNewsData(String requestUrl) {
         // Create URL object
@@ -55,11 +51,8 @@ public final class Utils {
             Log.e(LOG_TAG, "Error making HTTP request", e);
         }
 
-        // Extract relevant fields from the JSON response and create an {@link Event} object
-        List<News> news = extractNews(jsonResponse);
-
-        // Return the {@link News}
-        return news;
+        // Extract relevant fields from the JSON response and create an Event object
+        return extractNews(jsonResponse);
     }
 
     /**
@@ -119,13 +112,14 @@ public final class Utils {
     }
 
     /**
-     * Convert the {@link InputStream} into a String which contains the
+     * Convert the InputStream into a String which contains the
      * whole JSON response from the server.
      */
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
         if (inputStream != null) {
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream,
+                    Charset.forName("UTF-8"));
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line = reader.readLine();
             while (line != null) {
@@ -137,7 +131,7 @@ public final class Utils {
     }
 
     /**
-     * Return a list of {@link News} objects that has been built up from
+     * Return a list of News objects that has been built up from
      * parsing a JSON response.
      */
     public static List<News> extractNews(String newsJSON) {
@@ -177,9 +171,6 @@ public final class Utils {
             }
 
         } catch (JSONException e) {
-            // If an error is thrown when executing any of the above statements in the "try" block,
-            // catch the exception here, so the app doesn't crash. Print a log message
-            // with the message from the exception.
             Log.e("Utils", "Problem parsing the news JSON results", e);
         }
 
